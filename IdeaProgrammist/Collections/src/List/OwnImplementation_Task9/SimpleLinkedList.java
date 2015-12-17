@@ -63,19 +63,20 @@ public class SimpleLinkedList{
         if(next == find) {
             last.ref = paste;
             last = paste;
+            size++;
         }else {
             for (int i = 0; i < size; i++) {
                 if (before.object == find) {
                     next = before.ref;
                     before.ref = paste;
                     paste.ref = next;
+                    size++;
                     break;
                 }else {
                     before = before.ref;
                 }
             }
         }
-        size++;
     }
 
     public void printList() {
