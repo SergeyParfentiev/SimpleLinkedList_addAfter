@@ -10,12 +10,6 @@ public class SimpleLinkedList{
     private int size;
     private  Node last;
 
-    public SimpleLinkedList() {
-        size = 0;
-    }
-
-
-
     private class Node {
         Object object;
         Node ref;
