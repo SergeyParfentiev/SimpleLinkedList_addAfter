@@ -1,9 +1,11 @@
 package List.OwnImplementation_Task9;
 
+import java.util.Iterator;
+
 /**
  * Created by Byblik272 on 12/12/2015.
  */
-public class SimpleLinkedList {
+public class SimpleLinkedList{
     private Node first;
     private int size;
     private  Node last;
@@ -11,6 +13,8 @@ public class SimpleLinkedList {
     public SimpleLinkedList() {
         size = 0;
     }
+
+
 
     private class Node {
         Object object;
@@ -20,10 +24,13 @@ public class SimpleLinkedList {
     public void addFirst(Object o) {
         Node node = new Node();
         node.object = o;
-        if(first != null) {
+        if(first == null) {
+            first = node;
+            last = node;
+        } else {
             node.ref = first;
+            first = node;
         }
-        first = node;
         size++;
     }
     public void addLast(Object o) {
@@ -44,7 +51,7 @@ public class SimpleLinkedList {
         Node paste = new Node();
         paste.object = insert;
         for(int i = 0; i < size; i++) {
-            if(first == null || (i == size && next != find)) {
+            if(first == null || (i == size && next.object != find)) {
                 try {
                     throw new Exception();
                 } catch (Exception e) {
@@ -56,16 +63,32 @@ public class SimpleLinkedList {
         if(next == find) {
             last.ref = paste;
             last = paste;
-        }
-        for(int i = 0; i < size; i++) {
-            if(before == find) {
-                next = before.ref;
-                before.ref = paste;
-                paste.ref = next;
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (before.object == find) {
+                    next = before.ref;
+                    before.ref = paste;
+                    paste.ref = next;
+                    break;
+                }else {
+                    before = before.ref;
+                }
             }
-            before = before.ref;
         }
         size++;
+    }
+
+    public void printList() {
+        if(size == 0) {
+            System.out.println("List is empty");
+        }
+        System.out.print(" { ");
+        Node cp = first;
+        while (cp.ref != null) {
+            System.out.print(cp.object + ", ");
+            cp = cp.ref;
+        }
+        System.out.println(cp.object + " }");
     }
     public int getSize() {
         return size;
@@ -74,5 +97,6 @@ public class SimpleLinkedList {
     public Node getRoot() {
         return first;
     }
+
 
 }
